@@ -61,6 +61,7 @@
             android:layout_marginTop="4dp">
 
             <TextView
+                android:id="@+id/bntRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Criar Conta"
@@ -69,6 +70,7 @@
                 android:textColor="@color/white"/>
 
             <TextView
+                android:id="@+id/bntRecover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recuperar Conta"
@@ -80,7 +82,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminateTint="@color/white"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            tools:visibility="visible"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
