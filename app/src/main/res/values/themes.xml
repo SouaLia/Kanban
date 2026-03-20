@@ -9,6 +9,10 @@
 
     <style name="Theme.Cecilia" parent="Base.Theme.Cecilia" />
 
+    <style name="CustomTabLayout" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <!-- Botao-->
     <style name="ButtonTheme" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">match_parent</item>
