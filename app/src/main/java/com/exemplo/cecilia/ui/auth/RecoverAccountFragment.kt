@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
 import com.exemplo.cecilia.databinding.FragmentRecoverAccountBinding
+import com.exemplo.cecilia.task.util.initToolbar
 
 class RecoverAccountFragment : Fragment() {
     private var _binding: FragmentRecoverAccountBinding? = null
@@ -19,6 +20,11 @@ class RecoverAccountFragment : Fragment() {
     ): View {
         _binding = FragmentRecoverAccountBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbar(binding.toolbar)
     }
 
     override fun onDestroyView() {

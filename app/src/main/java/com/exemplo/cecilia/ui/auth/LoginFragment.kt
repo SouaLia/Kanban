@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
@@ -41,6 +42,18 @@ class LoginFragment : Fragment() {
 
     }
 
+    private fun validateData(){
+        val email = binding.edittextEmail.text.toString().trim()
+        val senha = binding.edittextSenha.text.toString().trim()
+        if (email.isNotBlank()){
+            findNavController().navigate(R.id.action_global_homeFragment)
+        } else{
+            Toast.makeText(requireContext(), "Preencha a senha!", Toast.LENGTH_LONG).show()
+
+        }
+    } else{
+        Toast.makeText(requireContext(), "Preencha o email!", Toast.LENGTH_LONG).show()
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
