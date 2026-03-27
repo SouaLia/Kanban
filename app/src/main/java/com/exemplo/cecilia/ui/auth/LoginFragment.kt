@@ -43,17 +43,20 @@ class LoginFragment : Fragment() {
     }
 
     private fun validateData(){
-        val email = binding.edittextEmail.text.toString().trim()
-        val senha = binding.edittextSenha.text.toString().trim()
+        val email = binding.editextEmail.text.toString().trim()
+        val senha = binding.editextSenha.text.toString().trim()
         if (email.isNotBlank()){
-            findNavController().navigate(R.id.action_global_homeFragment)
-        } else{
+            if (senha.isNotBlank()){
+                findNavController().navigate(R.id.action_global_homeFragment)
+
+        }else{
             Toast.makeText(requireContext(), "Preencha a senha!", Toast.LENGTH_LONG).show()
 
         }
-    } else{
+    }else{
         Toast.makeText(requireContext(), "Preencha o email!", Toast.LENGTH_LONG).show()
-    }
+    }}
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

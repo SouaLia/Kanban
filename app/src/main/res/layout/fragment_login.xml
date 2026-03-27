@@ -24,7 +24,7 @@
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/editextEmail"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="Digite seu e-mail"
@@ -39,7 +39,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="16dp"/>
         <EditText
-            android:id="@+id/senha"
+            android:id="@+id/editextSenha"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:inputType="textPassword"
