@@ -13,19 +13,29 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <!-- Botao-->
-    <style name="ButtonTheme" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="android:textSize">16sp</item>
+
+    <style name="EditTextTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/bg_edit_text</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textSize">14sp</item>
     </style>
+
+    <!-- Botao-->
+    <style name="ButtonTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/bg_btn</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/color_default</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
     <!-- Radio Button -->
     <style name="MyRadioButton" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/black</item>
         <item name="colorControlActivated">@color/darker_default</item>
     </style>
 
+
+    <!--BottomSheetDialogWrapper -->
     <style name="BottomSheetDialogWrapper" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
