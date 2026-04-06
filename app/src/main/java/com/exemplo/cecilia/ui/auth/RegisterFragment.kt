@@ -10,6 +10,7 @@ import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
 import com.exemplo.cecilia.databinding.FragmentRegisterBinding
 import com.exemplo.cecilia.task.util.initToolbar
+import com.exemplo.cecilia.task.util.showBottomSheet
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -36,11 +37,10 @@ class RegisterFragment : Fragment() {
             if(senha.isNotBlank()){
                 Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(requireContext(), "Preencha uma senha!", Toast.LENGTH_LONG).show()
+                showBottomSheet(message = R.string.password_empty_register_fragment)
             }
         }else{
-            Toast.makeText(requireContext(), "Preencha um email válido!", Toast.LENGTH_SHORT).show()
-        }
+            showBottomSheet(message = R.string.email_empty_register_fragment)        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

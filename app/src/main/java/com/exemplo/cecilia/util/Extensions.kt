@@ -16,20 +16,23 @@ fun Fragment.initToolbar(toolbar: Toolbar){
     }
 }
 
-fun Fragment.showBottonSheet(
+fun Fragment.showBottomSheet(
     titleDialog: Int? = null,
     titleButton: Int? = null,
-    mensagem: Int,
+    message: Int,
     onClick: () -> Unit ={}
-){/* ERRO 134
-    val bottomSheetDialog = BottomSheetDialog(requireContext())
-    val binding: BottomSheetBinding =
-        BottomSheetBinding.inflate( layoutInflater, null, false)
+){
+    val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+    val binding: BottonSheetBinding =
+        BottonSheetBinding.inflate( layoutInflater, null, false)
+
     binding.textviewTitle.text= getText(titleDialog ?: R.string.text_title_warning )
-    binding.textviewMessage.text = getText(mensagem)
-    binding.buttonOk.text = getText(titleButton ?: R.string.text_button_warning)
-    binding.buttonOK.setOnClickListener{
+    binding.textviewMessage.text = getText(message)
+    binding.buttonOk.setOnClickListener {
         onClick()
         bottomSheetDialog.dismiss()
     }
-}*/
+
+    bottomSheetDialog.setContentView(binding.root)
+    bottomSheetDialog.show()
+}

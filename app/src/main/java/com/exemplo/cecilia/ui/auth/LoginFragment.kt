@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
+import com.exemplo.cecilia.task.util.showBottomSheet
 
 class LoginFragment : Fragment() {
 
@@ -31,7 +32,7 @@ class LoginFragment : Fragment() {
 
     private fun initListener() {
         binding.buttonLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_global_homeFragment)
+            validateData()
         }
         binding.bntRecover.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -50,11 +51,10 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_global_homeFragment)
 
         }else{
-            Toast.makeText(requireContext(), "Preencha a senha!", Toast.LENGTH_LONG).show()
-
+                showBottomSheet(message = R.string.password_empty)
         }
     }else{
-        Toast.makeText(requireContext(), "Preencha o email!", Toast.LENGTH_LONG).show()
+            showBottomSheet(message = R.string.email_empty)
     }}
 
     override fun onDestroyView() {

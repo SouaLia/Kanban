@@ -10,6 +10,7 @@ import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
 import com.exemplo.cecilia.databinding.FragmentRecoverAccountBinding
 import com.exemplo.cecilia.task.util.initToolbar
+import com.exemplo.cecilia.task.util.showBottomSheet
 
 class RecoverAccountFragment : Fragment() {
     private var _binding: FragmentRecoverAccountBinding? = null
@@ -39,7 +40,7 @@ class RecoverAccountFragment : Fragment() {
         if(email.isNotBlank()){
                 Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
         }else{
-            Toast.makeText(requireContext(), "Preencha um email válido!", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.email_empty)
         }
     }
 
