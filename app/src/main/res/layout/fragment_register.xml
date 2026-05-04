@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Criar Conta"
+                android:text="@string/text_button_register_login_fragment"
                 android:textColor="@color/white"
                 android:paddingTop="20dp"
                 android:layout_gravity="center_horizontal"/>
@@ -38,14 +38,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-mail"
+            android:text="@string/email_text"
             android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/editextEmail"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Digite seu e-mail"
+            android:hint="@string/hint_edit_email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:layout_marginTop="4dp"
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Senha"
+            android:text="@string/hint_edit_password"
             android:textColor="@color/white"
             android:layout_marginTop="16dp"/>
         <EditText
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:inputType="textPassword"
-            android:hint="Digite sua senha"
+            android:hint="@string/password_text"
             android:padding="10dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/bg_edit_text"/>
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             style='@style/ButtonTheme'
-            android:text="Entrar"/>
+            android:text="@string/text_button_register_fragment"/>
 
         <ProgressBar
             android:id="@+id/progressBar"

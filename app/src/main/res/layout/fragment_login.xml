@@ -20,14 +20,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-mail"
+            android:text="@string/email_text"
             android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/editextEmail"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Digite seu e-mail"
+            android:hint="@string/hint_edit_email"
             android:inputType="textEmailAddress"
             style="@style/EditTextTheme"
             android:layout_marginTop="4dp"
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Senha"
+            android:text="@string/password_text"
             android:textColor="@color/white"
             android:layout_marginTop="16dp"/>
         <EditText
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:inputType="textPassword"
-            android:hint="Digite sua senha"
+            android:hint="@string/hint_edit_password"
             style="@style/EditTextTheme"
             android:layout_marginTop="4dp"
             android:background="@drawable/bg_edit_text"/>

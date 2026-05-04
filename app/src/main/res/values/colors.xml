@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_default">#9C71C0</color>
     <color name="darker_default">#4E2D6A</color>
+    <color name="color_details">#583B71</color>
+    <color name="color_delete">#C36363</color>
 
 </resources>

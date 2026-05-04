@@ -11,10 +11,14 @@ import com.exemplo.cecilia.databinding.FragmentLoginBinding
 import com.exemplo.cecilia.databinding.FragmentRegisterBinding
 import com.exemplo.cecilia.task.util.initToolbar
 import com.exemplo.cecilia.task.util.showBottomSheet
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,

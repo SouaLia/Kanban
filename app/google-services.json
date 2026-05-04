@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "882709300484",
+    "project_id": "teste1-9e70e",
+    "storage_bucket": "teste1-9e70e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882709300484:android:cc83c223e5f2b47b5a7c51",
+        "android_client_info": {
+          "package_name": "com.exemplo.cecilia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqDbrS7coLR6J-SGw_XRUViZauB1cCd2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

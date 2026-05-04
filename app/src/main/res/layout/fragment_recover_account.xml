@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recuperar conta"
+                android:text="@string/text_button_recover_login_fragment"
                 android:textColor="@color/white"
                 android:paddingTop="20dp"
                 android:layout_gravity="center_horizontal"/>
@@ -40,14 +40,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/TextViewMensagem"
-                android:text="Informe seu e-mail de cadastro para receber \n um link de alteração de senha"
+                android:text="@string/text_info_recover_accont_fragment"
                 android:textColor="@color/white"
                 android:textAlignment="center"
                 android:layout_marginTop="24dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E-mail"
+                android:text="@string/email_text"
                 android:textColor="@color/white"
                 android:layout_marginTop="24dp"/>
 
@@ -55,7 +55,7 @@
                 android:id="@+id/editextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="Digite seu e-mail"
+                android:hint="@string/hint_edit_email"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:layout_marginTop="4dp"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 style='@style/ButtonTheme'
-                android:text="Entrar"
+                android:text="@string/text_button_recover_account_fragment"
                 android:textColor="@color/color_default"/>
 
             <ProgressBar
