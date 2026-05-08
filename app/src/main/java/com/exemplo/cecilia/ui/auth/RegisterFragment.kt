@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
 import com.exemplo.cecilia.databinding.FragmentRegisterBinding
@@ -32,21 +34,46 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
+        initListener() // IMPORTANTE: Chamar o listener aqui!
     }
+
+    private fun initListener(){
+        binding.buttonRegister.setOnClickListener {
+            validateData()
+        }
+    }
+
     private fun validateData(){
         val email = binding.editextEmail.text.toString().trim()
         val senha = binding.editextSenha.text.toString().trim()
 
-        if(email.isNotBlank()){
-            if(senha.isNotBlank()){
-                Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
-            }else{
+        if (email.isNotBlank()){
+            if (senha.isNotBlank()){
+                binding.progressBar.isVisible = true
+                registerUser(email, senha)
+            } else {
+                // Erro corrigido aqui: removido o 'task.exception'
                 showBottomSheet(message = getString(R.string.password_empty_register_fragment))
             }
-        }else{
+        } else {
             showBottomSheet(message = getString(R.string.email_empty_register_fragment))
         }
     }
+
+    private fun registerUser(email: String, senha: String){
+        auth = FirebaseAuth.getInstance() // Inicializando a variável da classe
+        auth.createUserWithEmailAndPassword(email, senha)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful){
+                    findNavController().navigate(R.id.action_global_homeFragment)
+                } else {
+                    binding.progressBar.isVisible = false
+                    val error = task.exception?.message ?: "Erro ao cadastrar"
+                    showBottomSheet(message = error)
+                }
+            }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

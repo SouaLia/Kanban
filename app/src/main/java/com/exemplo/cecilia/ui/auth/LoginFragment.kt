@@ -10,11 +10,14 @@ import androidx.navigation.fragment.findNavController
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
 import com.exemplo.cecilia.task.util.showBottomSheet
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +30,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initListener()
     }
 
@@ -48,15 +52,29 @@ class LoginFragment : Fragment() {
         val senha = binding.editextSenha.text.toString().trim()
         if (email.isNotBlank()){
             if (senha.isNotBlank()){
-                findNavController().navigate(R.id.action_global_homeFragment)
-
+                loginUser(email, senha)
         }else{
                 showBottomSheet(message = getString(R.string.password_empty))
         }
     }else{
             showBottomSheet(message = getString(R.string.email_empty))
-    }}
+    } }
 
+    private fun loginUser(email: String, senha: String){
+        try {
+            auth.signInWithEmailAndPassword(email, senha)
+                .addOnCompleteListener {
+                    task ->
+                    if (task.isSuccessful){
+                        findNavController().navigate(R.id.action_global_homeFragment)
+                    }else{
+                        Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }catch (e: Exception){
+            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
