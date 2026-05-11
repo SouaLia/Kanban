@@ -5,15 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentHomeBinding
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
+import com.exemplo.cecilia.task.util.showBottomSheet
 import com.exemplo.cecilia.ui.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +30,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+
+        initListeners()
         initTabs()
     }
 
@@ -41,6 +50,21 @@ class HomeFragment : Fragment() {
             tab.text = getString(pageAdapter.getTile(position))
         }.attach()
     }
+
+    private fun initListeners(){
+        binding.btnLogout.setOnClickListener {
+            showBottomSheet(
+                titleButton = R.string.text_title_dialog_confirm_logout,
+                titleDialog = R.string.text_button_dialog_confirm_logout,
+                message=getString(R.string.text_message_dialog_confirm_logout),
+                onClick = {
+                    auth.signOut()
+                    findNavController().navigate(R.id.action_homeFragment_to_authentication)
+                }
+            )
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

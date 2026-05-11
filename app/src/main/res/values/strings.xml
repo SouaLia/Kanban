@@ -19,6 +19,10 @@
     <string name='text_title_login_fragment'>Login</string>
     <string name='text_button_register_login_fragment'>Criar conta</string>
     <string name='text_button_recover_login_fragment'>Recuperar conta</string>
+    <!-- Home fragment-->
+    <string name="text_button_dialog_confirm_logout">Deseja sair da sua conta?</string>
+    <string name="text_title_dialog_confirm_logout">Confirmar</string>
+    <string name="text_message_dialog_confirm_logout">Aperte em confirmar para sair da sua conta</string>
     <!--   Register Fragment  -->
     <string name="password_empty_register_fragment">Preencha uma senha</string>
     <string name="email_empty_register_fragment">Preencha um email válido</string>

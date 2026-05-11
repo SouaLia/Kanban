@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exemplo.cecilia.R
+import com.exemplo.cecilia.data.model.Status
 import com.exemplo.cecilia.data.model.Task
 import com.exemplo.cecilia.databinding.FragmentHomeBinding
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
@@ -31,6 +32,8 @@ class TodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListener()
+
+        initRecyclerViewTask(getTask())
     }
     private fun initListener(){
         binding.floatingActionButton.setOnClickListener {
@@ -39,9 +42,20 @@ class TodoFragment : Fragment() {
     }
 
     private fun initRecyclerViewTask(taskList: List<Task>){
-        taskAdapter = TaskAdapter(taskList)
+        taskAdapter = TaskAdapter(requireContext(),taskList)
         binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewTask.setHasFixedSize(true)
+
+        binding.recyclerViewTask.adapter = taskAdapter
     }
+
+    private fun getTask() = listOf(
+        Task("9", "Testar persistência de dados", Status.TODO),
+        Task("10", "Otimizar tempo de resposta da API", Status.TODO),
+        Task("11", "Documentar métodos da classe Adapter", Status.TODO),
+        Task("12", "Implementar exclusão de tarefas", Status.TODO),
+        Task("13", "Finalizar design do Kanban", Status.TODO)
+    )
 
     override fun onDestroyView() {
         super.onDestroyView()

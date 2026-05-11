@@ -5,6 +5,10 @@
     <color name="color_default">#9C71C0</color>
     <color name="darker_default">#4E2D6A</color>
     <color name="color_details">#583B71</color>
+
     <color name="color_delete">#C36363</color>
+
+    <color name="status_todo">#9D3C17</color>
+    <color name="status_done"> #106F13 </color>
 
 </resources>

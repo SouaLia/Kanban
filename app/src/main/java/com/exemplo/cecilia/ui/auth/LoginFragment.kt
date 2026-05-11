@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.databinding.FragmentLoginBinding
@@ -31,6 +32,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = FirebaseAuth.getInstance()
+
         initListener()
     }
 
@@ -52,6 +55,7 @@ class LoginFragment : Fragment() {
         val senha = binding.editextSenha.text.toString().trim()
         if (email.isNotBlank()){
             if (senha.isNotBlank()){
+                binding.progressBar.isVisible = true
                 loginUser(email, senha)
         }else{
                 showBottomSheet(message = getString(R.string.password_empty))
@@ -63,11 +67,11 @@ class LoginFragment : Fragment() {
     private fun loginUser(email: String, senha: String){
         try {
             auth.signInWithEmailAndPassword(email, senha)
-                .addOnCompleteListener {
-                    task ->
+                .addOnCompleteListener { task ->
                     if (task.isSuccessful){
                         findNavController().navigate(R.id.action_global_homeFragment)
                     }else{
+                        binding.progressBar.isVisible = false
                         Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
