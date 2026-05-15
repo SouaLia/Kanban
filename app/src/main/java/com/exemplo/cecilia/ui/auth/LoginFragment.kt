@@ -41,11 +41,11 @@ class LoginFragment : Fragment() {
         binding.buttonLogin.setOnClickListener {
             validateData()
         }
-        binding.bntRecover.setOnClickListener {
+        binding.bntRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
         binding.bntRecover.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_recoverAccountFragment2)
         }
 
     }

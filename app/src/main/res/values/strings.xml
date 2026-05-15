@@ -32,6 +32,7 @@
     <string name='text_info_recover_accont_fragment'>Informe seu email de cadastro para receber \n um link</string>
     <string name='text_title_toolbar_recover_account'>Recuperar conta</string>
     <string name='text_button_recover_account_fragment'>Enviar</string>
+    <string name='text_message_recover_accont_fragment'>Enviado</string>
     <!-- Form Task Fragment -->
     <string name="description_text_form_task_fragment">Descrição</string>
     <string name="description_empty_form_task_fragment">Preencha uma descrição</string>
