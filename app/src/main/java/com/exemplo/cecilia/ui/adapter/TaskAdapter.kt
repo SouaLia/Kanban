@@ -17,7 +17,6 @@ class TaskAdapter(
 ) : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        // Ajustei para LayoutInflater.from (com L maiúsculo)
         val binding = ItemTaskBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
