@@ -34,9 +34,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+        // ADICIONE ESTA LINHA ABAIXO:
+        freeCompilerArgs += "-Xskip-metadata-version-check"
     }
-    viewBinding{
-        enable= true
+    viewBinding {
+        enable = true
     }
 }
 
@@ -57,4 +59,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:24.0.1")
 
     implementation("com.google.firebase:firebase-database:22.0.1")
+
+    implementation("com.google.firebase:firebase-analytics")
 }

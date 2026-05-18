@@ -38,4 +38,6 @@
     <string name="description_empty_form_task_fragment">Preencha uma descrição</string>
     <string name="description_hint_form_task_fragment">Informe sua nova Tarefa</string>
     <string name="status_form_task_fragment">Status</string>
+    <string name="text_save_sucess_form_task_fragment"> Tarefa salva com sucesso </string>
+    <string name="error_generic"> Desculpe, algo deu errado</string>
 </resources>
