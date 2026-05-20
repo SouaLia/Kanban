@@ -5,15 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.exemplo.cecilia.R
-import com.exemplo.cecilia.data.model.Status
 import com.exemplo.cecilia.data.model.Task
 import com.exemplo.cecilia.databinding.FragmentDoneBinding
-import com.exemplo.cecilia.databinding.FragmentTodoBinding
+import com.exemplo.cecilia.ui.adapter.TaskAdapter
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 
 class DoneFragment : Fragment() {
     private var _binding: FragmentDoneBinding? = null
     private val binding get() = _binding!!
+    private lateinit var taskAdapter: TaskAdapter
+    private lateinit var reference: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,11 +35,64 @@ class DoneFragment : Fragment() {
         return binding.root
     }
 
-    private fun getTask() = listOf(
-        Task ("0", "Criar nova tela do app", Status.DONE),
-        Task ("1", "Validar informações de login", Status.DONE),
-        Task ("2", "Adicionar nova funcionalidade no app", Status.DONE),
-    )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        reference = Firebase.database.reference
+        auth = Firebase.auth
+
+        initRecyclerViewTask()
+        getTask()
+    }
+
+    private fun initRecyclerViewTask() {
+        taskAdapter = TaskAdapter(requireContext()) { task, option ->
+            optionSelected(task, option)
+        }
+        binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewTask.setHasFixedSize(true)
+        binding.recyclerViewTask.adapter = taskAdapter
+    }
+
+    private fun optionSelected(task: Task, option: Int) {
+        when (option) {
+            TaskAdapter.SELECT_REMOVE -> {
+                Toast.makeText(requireContext(), "Removendo ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_EDIT -> {
+                Toast.makeText(requireContext(), "Editando ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_DETAILS -> {
+                Toast.makeText(requireContext(), "Detalhes ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_NEXT -> {
+                Toast.makeText(requireContext(), "Próximo", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun getTask() {
+        reference
+            .child("task")
+            .child(auth.currentUser?.uid ?: "")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    val taskList = mutableListOf<Task>()
+
+                    for (ds in p0.children) {
+                        val task = ds.getValue(Task::class.java) as Task
+                        taskList.add(task)
+                    }
+
+                    taskAdapter.submitList(taskList)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

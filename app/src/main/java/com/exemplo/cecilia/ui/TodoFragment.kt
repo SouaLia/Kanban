@@ -45,7 +45,7 @@ class TodoFragment : Fragment() {
 
         initListener()
         initRecyclerViewTask()
-        getTasks()
+        getTask()
     }
 
     private fun initListener() {
@@ -55,26 +55,46 @@ class TodoFragment : Fragment() {
     }
 
     private fun initRecyclerViewTask() {
-        taskAdapter = TaskAdapter(requireContext(), emptyList())
+        taskAdapter = TaskAdapter(requireContext()) { task, option ->
+            optionSelected(task, option)
+        }
         binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewTask.setHasFixedSize(true)
         binding.recyclerViewTask.adapter = taskAdapter
     }
 
-    private fun getTasks() {
+    private fun optionSelected(task: Task, option: Int) {
+        when (option) {
+            TaskAdapter.SELECT_REMOVE -> {
+                Toast.makeText(requireContext(), "Removendo ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_EDIT -> {
+                Toast.makeText(requireContext(), "Editando ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_DETAILS -> {
+                Toast.makeText(requireContext(), "Detalhes ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_NEXT -> {
+                Toast.makeText(requireContext(), "Próximo", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun getTask() {
         reference
             .child("task")
             .child(auth.currentUser?.uid ?: "")
             .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
+                override fun onDataChange(p0: DataSnapshot) {
                     val taskList = mutableListOf<Task>()
 
-                    for (ds in snapshot.children) {
+                    for (ds in p0.children) {
                         val task = ds.getValue(Task::class.java)
                         if (task != null) {
                             taskList.add(task)
                         }
                     }
+
                     taskAdapter.submitList(taskList)
                 }
 
