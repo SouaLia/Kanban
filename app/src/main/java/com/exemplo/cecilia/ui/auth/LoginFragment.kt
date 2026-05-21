@@ -19,7 +19,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
-
+    // TODO delete pos teste
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
