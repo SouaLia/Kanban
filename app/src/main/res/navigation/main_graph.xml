@@ -70,6 +70,11 @@
         android:id="@+id/formTaskFragment"
         android:name="com.exemplo.cecilia.ui.FormTaskFragment"
         android:label="fragment_form_task"
-        tools:layout="@layout/fragment_form_task" />
+        tools:layout="@layout/fragment_form_task" >
+        <argument
+            android:name="task"
+            app:argType="com.exemplo.cecilia.data.model.Task"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

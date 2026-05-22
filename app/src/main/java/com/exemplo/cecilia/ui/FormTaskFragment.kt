@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.exemplo.cecilia.R
 import com.exemplo.cecilia.data.model.Status
 import com.exemplo.cecilia.data.model.Task
@@ -30,6 +31,7 @@ class FormTaskFragment : Fragment() {
 
     private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
+    private val args: FormTaskFragment by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,9 +49,35 @@ class FormTaskFragment : Fragment() {
         reference = Firebase.database.reference
         auth = Firebase.auth
 
+        getArgs()
         initListener()
     }
 
+    private fun getArgs(){
+        args.task.let{
+            if(it != null){
+                this.task = it
+                configTask()
+            }
+        }
+    }
+
+    private fun configTask(){
+        newTask = false
+        status= task.status
+        binding.toolbar.title = getString(R.string.text_toolbar_update_form_task_fragment)
+        binding.editTextDescricao.setText(task.description)
+        setStatus()
+    }
+
+    private fun setStatus(){
+        val id = when(task.status){
+            Status.TODO -> R.id.rbTodo
+            Status.DOING -> R.id.rbDoing
+            else -> R.id.rbDone
+        }
+        binding.radioGroup.check(id)
+    }
     private fun initListener() {
         binding.buttonSave.setOnClickListener {
             validateData()
@@ -72,14 +100,9 @@ class FormTaskFragment : Fragment() {
 
             if (newTask) {
                 task = Task(
-                    id = reference.push().key ?: "",
-                    description = description,
-                    status = status
+                    id=reference.database.reference.push().key ?: ""
                 )
-
             }
-
-
             saveTask()
         } else {
             showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
@@ -101,7 +124,11 @@ class FormTaskFragment : Fragment() {
                     if (newTask) {
                         findNavController().popBackStack()
                     } else {
-                        binding.progressBar.isVisible = false
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.text_update_sucess_form_tsak_fragment,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
                     binding.progressBar.isVisible = false

@@ -47,5 +47,6 @@
     <string name="description_hint_form_task_fragment">Informe sua nova Tarefa</string>
     <string name="status_form_task_fragment">Status</string>
     <string name="text_save_sucess_form_task_fragment"> Tarefa salva com sucesso </string>
-
+    <string name="text_toolbar_update_form_task_fragment">Editando tarefa...</string>
+    <string name="text_update_sucess_form_tsak_fragment">Sucesso</string>
 </resources>
