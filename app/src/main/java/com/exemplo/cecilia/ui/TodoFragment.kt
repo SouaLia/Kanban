@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exemplo.cecilia.R
@@ -31,6 +32,8 @@ class TodoFragment : Fragment() {
     private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
+    private val viewModel: TaskViewModel by activityViewModels ()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,14 +53,37 @@ class TodoFragment : Fragment() {
         initRecyclerViewTask()
         getTask()
     }
-
     private fun initListener() {
         binding.floatingActionButton.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
             findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
         }
+
+        observerViewModel()
     }
 
+    private fun observerViewModel() {
+        viewModel.taskUpdate.observe(viewLifecycleOwner) { updateTask ->
+            if (updateTask.status == Status.TODO) {
+                val oldList = taskAdapter.currentList
+
+                val newList = oldList.map { task ->
+                    if (task.id == updateTask.id) {
+                        task.copy(description = updateTask.description)
+                    } else {
+                        task
+                    }
+                }
+
+                val position = newList.indexOfFirst { it.id == updateTask.id }
+
+                taskAdapter.submitList(newList)
+                if (position != -1) {
+                    taskAdapter.notifyItemChanged(position)
+                }
+            }
+        }
+    }
     private fun initRecyclerViewTask() {
         taskAdapter = TaskAdapter(requireContext()) { task, option ->
             optionSelected(task, option)
@@ -66,7 +92,6 @@ class TodoFragment : Fragment() {
         binding.recyclerViewTask.setHasFixedSize(true)
         binding.recyclerViewTask.adapter = taskAdapter
     }
-
     private fun optionSelected(task: Task, option: Int) {
         when (option) {
             TaskAdapter.SELECT_REMOVE -> {
@@ -90,7 +115,6 @@ class TodoFragment : Fragment() {
             }
         }
     }
-
     private fun getTask() {
         reference
             .child("task")
@@ -117,7 +141,6 @@ class TodoFragment : Fragment() {
                 }
             })
     }
-
     private fun deleteTask(task: Task){
         reference
             .child("task")
@@ -131,7 +154,6 @@ class TodoFragment : Fragment() {
                 }
             }
     }
-
     private fun listEmpty(taskList: List<Task>) {
         binding.textInfo.text = if (taskList.isEmpty()){
             getString(R.string.text_list_task_empty)

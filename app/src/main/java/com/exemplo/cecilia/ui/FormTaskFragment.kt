@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.exemplo.cecilia.R
@@ -31,6 +32,8 @@ class FormTaskFragment : Fragment() {
 
     private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
+
+    private val viewModel: TaskViewModel by activityViewModels ()
     private val args: FormTaskFragment by navArgs()
 
     override fun onCreateView(
@@ -61,7 +64,6 @@ class FormTaskFragment : Fragment() {
             }
         }
     }
-
     private fun configTask(){
         newTask = false
         status= task.status
@@ -69,7 +71,6 @@ class FormTaskFragment : Fragment() {
         binding.editTextDescricao.setText(task.description)
         setStatus()
     }
-
     private fun setStatus(){
         val id = when(task.status){
             Status.TODO -> R.id.rbTodo
@@ -91,7 +92,6 @@ class FormTaskFragment : Fragment() {
             }
         }
     }
-
     private fun validateData() {
         val description = binding.editTextDescricao.text.toString().trim()
 
@@ -129,13 +129,18 @@ class FormTaskFragment : Fragment() {
                             R.string.text_update_sucess_form_tsak_fragment,
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        viewModel.setUpdateTask(task)
+                        binding.progressBar.isVisible=false
                     }
                 } else {
                     binding.progressBar.isVisible = false
-                    showBottomSheet(message = getString(R.string.error_generic))
+                    val errorMessage = result.exception?.message
+                        ?: getString(R.string.error_generic)
                 }
             }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
