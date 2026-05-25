@@ -41,8 +41,8 @@ class HomeFragment : Fragment() {
         val pageAdapter = ViewPagerAdapter(requireActivity())
         binding.viewPager.adapter = pageAdapter
         pageAdapter.addFragment(TodoFragment(), R.string.status_task_todo)
-        pageAdapter.addFragment(TodoFragment(), R.string.status_task_doing)
-        pageAdapter.addFragment(TodoFragment(), R.string.status_task_done)
+        pageAdapter.addFragment(DoingFragment(), R.string.status_task_doing)
+        pageAdapter.addFragment(DoneFragment(), R.string.status_task_done)
 
         binding.viewPager.offscreenPageLimit = pageAdapter.itemCount
 
@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initListeners(){
+
         binding.btnLogout.setOnClickListener {
             showBottomSheet(
                 titleButton = R.string.text_title_dialog_confirm_logout,

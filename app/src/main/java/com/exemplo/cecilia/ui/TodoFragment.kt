@@ -56,7 +56,7 @@ class TodoFragment : Fragment() {
     private fun initListener() {
         binding.floatingActionButton.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
-            findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
+            findNavController().navigate(action)
         }
 
         observerViewModel()

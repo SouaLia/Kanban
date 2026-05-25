@@ -34,7 +34,7 @@ class FormTaskFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     private val viewModel: TaskViewModel by activityViewModels ()
-    private val args: FormTaskFragment by navArgs()
+    private val args: FormTaskFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,7 +100,9 @@ class FormTaskFragment : Fragment() {
 
             if (newTask) {
                 task = Task(
-                    id=reference.database.reference.push().key ?: ""
+                    id = reference.database.reference.push().key ?: "",
+                    description = description,
+                    status = status
                 )
             }
             saveTask()
@@ -137,6 +139,7 @@ class FormTaskFragment : Fragment() {
                     binding.progressBar.isVisible = false
                     val errorMessage = result.exception?.message
                         ?: getString(R.string.error_generic)
+                    showBottomSheet(message = errorMessage)
                 }
             }
     }
